@@ -1,0 +1,29 @@
+{
+	"scopeName": "source.holypython",
+	"patterns": [
+		{
+			"include": "#holypython"
+		},
+		{
+			"include": "source.python"
+		}
+	],
+	"repository": {
+		"holypython": {
+			"patterns": [
+				{
+					"name": "keyword.declaration.function.holypython",
+					"match": "\\b(function|extends)\\b"
+				},
+				{
+					"name": "keyword.operator.assignment.holypython",
+					"match": "<-"
+				},
+				{
+					"name": "keyword.operator.range.holypython",
+					"match": "\\.\\."
+				}
+			]
+		}
+	}
+}

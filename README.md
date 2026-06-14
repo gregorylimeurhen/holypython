@@ -8,26 +8,27 @@
 | `def f(): ...`      | `function f() { ... }` |                                  |
 | `class C: ...`      | `class C { ... }`      |                                  |
 
-## Compilation
+### Compilation
 
-### Standard
+**Standard**
 ```sh
 python holypython.py foo.hpy
 ```
 
-### `uv`
+**`uv`**
 ```sh
 uv run python holypython.py foo.hpy
 ```
 
-## Testing
+### Syntax Highlighting
 
-### Standard
+**VSCode**
+1. Create extension:
 ```sh
-pytest
+cd packages/vscode
+npx --yes @vscode/vsce package
 ```
-
-### `uv`
+2. Install extension
 ```sh
-uv run pytest
+code --install-extension holypython-0.0.1.vsix
 ```
