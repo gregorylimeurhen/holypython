@@ -13,25 +13,26 @@
 
 ### Summary
 
-| Python         | HolyPython             | Notes                                |
-|----------------|------------------------|--------------------------------------|
-| `a == b`       | `a = b`                |                                      |
-| `a = b`        | `a <- b`               |                                      |
-| `[a, ..., b]`  | `[a..b]`               | `type(a) == type(b) == int and a<=b` |
-| `def f(): ...` | `function f() { ... }` |                                      |
-| `class C: ...` | `class C { ... }`      |                                      |
+| Python         | HolyPython             | Notes                                  |
+|----------------|------------------------|----------------------------------------|
+| `a == b`       | `a = b`                |                                        |
+| `a = b`        | `a <- b`               |                                        |
+| `[a, ..., b]`  | `[a..b]`               | `type(a) == type(b) == int and a <= b` |
+| `def f(): ...` | `function f() { ... }` |                                        |
+| `class C: ...` | `class C { ... }`      |                                        |
 
 ### Highlighting
 
-**VSCode**
+**VSCode and VSCodium**
 
 ```sh
 # Create extension
 cd holypython/packages/vscode
-npx --yes @vscode/vsce package
+npx @vscode/vsce package --out holypython.vsix
 
 # Install extension
-code --install-extension holypython-0.0.1.vsix
+code --install-extension holypython.vsix # for VSCode
+codium --install-extension holypython.vsix # for VSCodium
 ```
 
 ## Transpilation
