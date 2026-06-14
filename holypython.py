@@ -1,3 +1,6 @@
+# 🙏 **HolyPython.** *Python as God intended.*
+
+
 import io
 import pathlib
 import re
@@ -37,10 +40,12 @@ class AssignmentEditor:
 			t = self.tokens[i]
 			if i + 1 < len(self.tokens):
 				next_t = self.tokens[i + 1]
-				if t.string == "<" and next_t.string == "-" and t.end == next_t.start:
-					edited.append(t._replace(string="=", end=next_t.end))
-					i += 2
-					continue
+				if t.string == "<":
+					if next_t.string == "-":
+						if t.end == next_t.start:
+							edited.append(t._replace(string="=", end=next_t.end))
+							i += 2
+							continue
 			edited.append(t)
 			i += 1
 		source = tokenize.untokenize(edited)
@@ -60,8 +65,9 @@ class BlockEditor:
 			if stripped == "}":
 				continue
 			if i + 1 < len(self.lines):
-				if self.lines[i + 1].strip() == "{" and self.is_header(stripped):
-					line = self.edit_header_line(line)
+				if self.lines[i + 1].strip() == "{":
+					if self.is_header(stripped):
+						line = self.edit_header_line(line)
 			edited.append(line)
 		source = "".join(edited)
 		return source
@@ -71,9 +77,10 @@ class BlockEditor:
 		source = line[:-1] if newline else line
 		indent = source[:len(source) - len(source.lstrip())]
 		header = source.strip()
-		if header.startswith("class ") and " extends " in header:
-			name, parent = header[len("class "):].split(" extends ", 1)
-			header = f"class {name}({parent})"
+		if header.startswith("class "):
+			if " extends " in header:
+				name, parent = header[len("class "):].split(" extends ", 1)
+				header = f"class {name}({parent})"
 		return f"{indent}{header}:{newline}"
 
 	def is_header(self, source):
@@ -89,9 +96,10 @@ class DefEditor:
 	def edit_source(self):
 		edited = []
 		for t in self.tokens:
-			if t.type == token.NAME and t.string == "function":
-				edited.append(t._replace(string="def"))
-				continue
+			if t.type == token.NAME:
+				if t.string == "function":
+					edited.append(t._replace(string="def"))
+					continue
 			edited.append(t)
 		source = tokenize.untokenize(edited)
 		return source
@@ -106,9 +114,10 @@ class EqualityEditor:
 	def edit_source(self):
 		edited = []
 		for t in self.tokens:
-			if t.string == "=" and self.is_spaced(t):
-				edited.append(t._replace(string="=="))
-				continue
+			if t.string == "=":
+				if self.is_spaced(t):
+					edited.append(t._replace(string="=="))
+					continue
 			edited.append(t)
 		source = tokenize.untokenize(edited)
 		return source
@@ -197,14 +206,16 @@ class RangeEditor:
 	def get_split(self, left_token, right_token):
 		if left_token.string == ".":
 			left_dot = left_token.start
-		elif left_token.type == token.NUMBER and left_token.string.endswith("."):
-			left_dot = (left_token.end[0], left_token.end[1] - 1)
+		elif left_token.type == token.NUMBER:
+			if left_token.string.endswith("."):
+				left_dot = (left_token.end[0], left_token.end[1] - 1)
 		else:
 			return None
 		if right_token.string == ".":
 			right_dot = right_token.end
-		elif right_token.type == token.NUMBER and right_token.string.startswith("."):
-			right_dot = (right_token.start[0], right_token.start[1] + 1)
+		elif right_token.type == token.NUMBER:
+			if right_token.string.startswith("."):
+				right_dot = (right_token.start[0], right_token.start[1] + 1)
 		else:
 			return None
 		return left_dot, right_dot

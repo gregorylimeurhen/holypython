@@ -1,14 +1,12 @@
 🙏 **HolyPython.** *Python as God intended.*
 
-| Python              | HolyPython             | Note                                   |
-|---------------------|------------------------|----------------------------------------|
-| `a == b`            | `a = b`                |                                        |
-| `a = b`             | `a <- b`               |                                        |
-| `def`               | `function`             |                                        |
-| `[-1, ..., 1]`      | `[-1..1]`              |                                        |
-| `[f(a), ..., g(b)]` | `[f(a)..g(b)]`         | `f(a)`, `g(b)` non-decreasing integers |
-| `def f(): ...`      | `function f() { ... }` |                                        |
-| `class C: ...`      | `class C { ... }`      |                                        |
+| Python              | HolyPython             | Note                             |
+|---------------------|------------------------|----------------------------------|
+| `a == b`            | `a = b`                |                                  |
+| `a = b`             | `a <- b`               |                                  |
+| `[a, ..., b]`       | `[a..b]`               | `a`, `b` non-decreasing integers |
+| `def f(): ...`      | `function f() { ... }` |                                  |
+| `class C: ...`      | `class C { ... }`      |                                  |
 
 ## Compilation
 
@@ -23,6 +21,7 @@ uv run python holypython.py foo.hpy
 ```
 
 ## Testing
+
 ### Standard
 ```sh
 pytest
