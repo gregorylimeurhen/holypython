@@ -1,9 +1,3 @@
-"""
-🙏
-**HolyPython.**
-*Python as God intended.*
-"""
-
 import io
 import pathlib
 import re
@@ -11,15 +5,18 @@ import sys
 import token
 import tokenize
 
+
 def get_path():
 	arg = sys.argv[1]
 	path = pathlib.Path(arg).resolve()
 	return path
 
+
 def get_source(path):
 	with tokenize.open(path) as source_file:
 		source = source_file.read()
 	return source
+
 
 def get_tokens(source):
 	text = io.StringIO(source)
@@ -27,6 +24,7 @@ def get_tokens(source):
 	iterator = tokenize.generate_tokens(reader)
 	tokens = list(iterator)
 	return tokens
+
 
 class AssignmentEditor:
 	def __init__(self, source):
@@ -48,6 +46,42 @@ class AssignmentEditor:
 		source = tokenize.untokenize(edited)
 		return source
 
+
+class BlockEditor:
+	def __init__(self, source):
+		self.lines = source.splitlines(keepends=True)
+
+	def edit_source(self):
+		edited = []
+		for i, line in enumerate(self.lines):
+			stripped = line.strip()
+			if stripped == "{":
+				continue
+			if stripped == "}":
+				continue
+			if i + 1 < len(self.lines):
+				if self.lines[i + 1].strip() == "{" and self.is_header(stripped):
+					line = self.edit_header_line(line)
+			edited.append(line)
+		source = "".join(edited)
+		return source
+
+	def edit_header_line(self, line):
+		newline = "\n" if line.endswith("\n") else ""
+		source = line[:-1] if newline else line
+		indent = source[:len(source) - len(source.lstrip())]
+		header = source.strip()
+		if header.startswith("class ") and " extends " in header:
+			name, parent = header[len("class "):].split(" extends ", 1)
+			header = f"class {name}({parent})"
+		return f"{indent}{header}:{newline}"
+
+	def is_header(self, source):
+		if source.startswith("async "):
+			source = source[len("async "):]
+		return source.startswith("class ") or source.startswith("function ")
+
+
 class DefEditor:
 	def __init__(self, source):
 		self.tokens = get_tokens(source)
@@ -61,6 +95,7 @@ class DefEditor:
 			edited.append(t)
 		source = tokenize.untokenize(edited)
 		return source
+
 
 class EqualityEditor:
 	def __init__(self, source):
@@ -87,6 +122,7 @@ class EqualityEditor:
 		start = self.get_offset(t.start)
 		end = self.get_offset(t.end)
 		return self.source[start - 1].isspace() and self.source[end].isspace()
+
 
 class RangeEditor:
 	def __init__(self, source):
@@ -173,13 +209,16 @@ class RangeEditor:
 			return None
 		return left_dot, right_dot
 
+
 def write_script(source, path):
 	output_path = path.with_suffix(".py")
 	output_path.write_text(source)
 
+
 if __name__ == "__main__":
 	path = get_path()
 	source = get_source(path)
+	source = BlockEditor(source).edit_source()
 	source = EqualityEditor(source).edit_source()
 	source = AssignmentEditor(source).edit_source()
 	source = RangeEditor(source).edit_source()

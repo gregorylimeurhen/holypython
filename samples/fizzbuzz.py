@@ -8,7 +8,7 @@ def fizzbuzz(number):
 	return number % 15 == 0
 
 start = 1
-end = 100
+end = 50
 for number in list(range(start, end + 1)):
 	if fizzbuzz(number):
 		print("FizzBuzz")

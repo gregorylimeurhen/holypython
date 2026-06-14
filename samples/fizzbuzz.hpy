@@ -1,11 +1,17 @@
-function fizz(number):
+function fizz(number)
+{
 	return number % 3 = 0
+}
 
-function buzz(number):
+function buzz(number)
+{
 	return number % 5 = 0
+}
 
-function fizzbuzz(number):
+function fizzbuzz(number)
+{
 	return number % 15 = 0
+}
 
 start <- 1
 end <- 50
