@@ -6,10 +6,8 @@ class TwoSum:
 	def search(self):
 		l = 0
 		r = len(self.nums) - 1
-
 		while l < r:
 			current = self.nums[l] + self.nums[r]
-
 			if current == self.target:
 				return [l, r]
 			elif current < self.target:
@@ -17,11 +15,8 @@ class TwoSum:
 			else:
 				r = r - 1
 
-
 nums = list(range(1, 20 + 1))
 target = 25
-
 searcher = TwoSum(nums, target)
 solution = searcher.search()
-
 print(solution)

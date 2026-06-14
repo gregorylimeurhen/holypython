@@ -1,4 +1,6 @@
-🙏 **HolyPython.** *Python as God intended.*
+**HolyPython.** *Python as God intended.*
+
+<center>
 
 | Python              | HolyPython             | Note                             |
 |---------------------|------------------------|----------------------------------|
@@ -8,7 +10,13 @@
 | `def f(): ...`      | `function f() { ... }` |                                  |
 | `class C: ...`      | `class C { ... }`      |                                  |
 
-### Compilation
+</center>
+
+### Preview
+
+<center><img src="code.png" width="75%"></center>
+
+### How to compile
 
 **Standard**
 
@@ -22,7 +30,7 @@ python holypython.py foo.hpy
 uv run python holypython.py foo.hpy
 ```
 
-### Syntax Highlighting
+### How to enable syntax highlighting
 
 **VSCode**
 
