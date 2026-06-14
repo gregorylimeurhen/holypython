@@ -1,22 +1,18 @@
-**HolyPython.** *Python as God intended.*
 
-<center>
+<h1 align="center">🙏 HolyPython</h1>
+<p align="center">
+	<img src="carbon.png" style="width: min(640px, 80vw)">
+</p>
 
-| Python              | HolyPython             | Note                             |
-|---------------------|------------------------|----------------------------------|
-| `a == b`            | `a = b`                |                                  |
-| `a = b`             | `a <- b`               |                                  |
-| `[a, ..., b]`       | `[a..b]`               | `a`, `b` non-decreasing integers |
-| `def f(): ...`      | `function f() { ... }` |                                  |
-| `class C: ...`      | `class C { ... }`      |                                  |
+| Python         | HolyPython             | Note                             |
+|----------------|------------------------|----------------------------------|
+| `a == b`       | `a = b`                |                                  |
+| `a = b`        | `a <- b`               |                                  |
+| `[a, ..., b]`  | `[a..b]`               | `a`, `b` non-decreasing integers |
+| `def f(): ...` | `function f() { ... }` |                                  |
+| `class C: ...` | `class C { ... }`      |                                  |
 
-</center>
-
-### Preview
-
-<center><img src="code.png" width="75%"></center>
-
-### How to compile
+### How to transpile HolyPython to Python?
 
 **Standard**
 
@@ -30,19 +26,17 @@ python holypython.py foo.hpy
 uv run python holypython.py foo.hpy
 ```
 
-### How to enable syntax highlighting
+### How to enable syntax highlighting?
 
 **VSCode**
 
-1. Create extension:
+Create extension:
+```sh
+cd packages/vscode
+npx --yes @vscode/vsce package
+```
 
-   ```sh
-   cd packages/vscode
-   npx --yes @vscode/vsce package
-   ```
-
-2. Install extension:
-
-   ```sh
-   code --install-extension holypython-0.0.1.vsix
-   ```
+Install extension:
+```sh
+code --install-extension holypython-0.0.1.vsix
+```

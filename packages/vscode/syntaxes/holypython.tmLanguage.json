@@ -48,6 +48,10 @@
 					"match": "<-"
 				},
 				{
+					"name": "keyword.control.flow.python",
+					"match": "\\breturn\\b"
+				},
+				{
 					"match": "(\\[)\\s*(?:(\\d+)|([A-Za-z_]\\w*))\\s*(\\.\\.)\\s*(?:(\\d+)|([A-Za-z_]\\w*))\\s*(\\])",
 					"captures": {
 						"1": {

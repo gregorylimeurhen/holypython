@@ -1,4 +1,4 @@
-class TwoSum:
+class TwoSumII:
 	def __init__(self, nums, target):
 		self.nums = nums
 		self.target = target
@@ -9,14 +9,8 @@ class TwoSum:
 		while l < r:
 			current = self.nums[l] + self.nums[r]
 			if current == self.target:
-				return [l, r]
-			elif current < self.target:
+				return [l + 1, r + 1]
+			if current < self.target:
 				l = l + 1
-			else:
+			if current > self.target:
 				r = r - 1
-
-nums = list(range(1, 20 + 1))
-target = 25
-searcher = TwoSum(nums, target)
-solution = searcher.search()
-print(solution)
