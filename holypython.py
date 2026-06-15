@@ -22,40 +22,6 @@ def get_tokens(source):
 	tokens = list(iterator)
 	return tokens
 
-class VariableAssignmentEditor:
-	def __init__(self, source):
-		self.tokens = get_tokens(source)
-
-	def edit_source(self):
-		edited = []
-		i = 0
-		while i < len(self.tokens):
-			t = self.tokens[i]
-			if i + 1 < len(self.tokens):
-				next_t = self.tokens[i + 1]
-				if t.string == "<" and next_t.string == "-" and t.end == next_t.start:
-					edited.append(t._replace(string="=", end=next_t.end))
-					i += 2
-					continue
-			edited.append(t)
-			i += 1
-		source = tokenize.untokenize(edited)
-		return source
-
-class FunctionDefinitionEditor:
-	def __init__(self, source):
-		self.tokens = get_tokens(source)
-
-	def edit_source(self):
-		edited = []
-		for t in self.tokens:
-			if t.type == token.NAME and t.string == "function":
-				edited.append(t._replace(string="def"))
-				continue
-			edited.append(t)
-		source = tokenize.untokenize(edited)
-		return source
-
 class EqualityCheckEditor:
 	def __init__(self, source):
 		self.source = source
@@ -81,6 +47,40 @@ class EqualityCheckEditor:
 		start = self.get_offset(t.start)
 		end = self.get_offset(t.end)
 		return self.source[start - 1].isspace() and self.source[end].isspace()
+
+class FunctionDefinitionEditor:
+	def __init__(self, source):
+		self.tokens = get_tokens(source)
+
+	def edit_source(self):
+		edited = []
+		for t in self.tokens:
+			if t.type == token.NAME and t.string == "function":
+				edited.append(t._replace(string="def"))
+				continue
+			edited.append(t)
+		source = tokenize.untokenize(edited)
+		return source
+
+class VariableAssignmentEditor:
+	def __init__(self, source):
+		self.tokens = get_tokens(source)
+
+	def edit_source(self):
+		edited = []
+		i = 0
+		while i < len(self.tokens):
+			t = self.tokens[i]
+			if i + 1 < len(self.tokens):
+				next_t = self.tokens[i + 1]
+				if t.string == "<" and next_t.string == "-" and t.end == next_t.start:
+					edited.append(t._replace(string="=", end=next_t.end))
+					i += 2
+					continue
+			edited.append(t)
+			i += 1
+		source = tokenize.untokenize(edited)
+		return source
 
 def write_script(source, path):
 	output_path = path.with_suffix(".py")
