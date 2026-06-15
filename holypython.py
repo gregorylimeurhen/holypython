@@ -5,18 +5,15 @@ import sys
 import token
 import tokenize
 
-
 def get_path():
 	arg = sys.argv[1]
 	path = pathlib.Path(arg).resolve()
 	return path
 
-
 def get_source(path):
 	with tokenize.open(path) as source_file:
 		source = source_file.read()
 	return source
-
 
 def get_tokens(source):
 	text = io.StringIO(source)
@@ -24,7 +21,6 @@ def get_tokens(source):
 	iterator = tokenize.generate_tokens(reader)
 	tokens = list(iterator)
 	return tokens
-
 
 class VariableAssignmentEditor:
 	def __init__(self, source):
@@ -46,7 +42,6 @@ class VariableAssignmentEditor:
 		source = tokenize.untokenize(edited)
 		return source
 
-
 class FunctionDefinitionEditor:
 	def __init__(self, source):
 		self.tokens = get_tokens(source)
@@ -60,7 +55,6 @@ class FunctionDefinitionEditor:
 			edited.append(t)
 		source = tokenize.untokenize(edited)
 		return source
-
 
 class EqualityCheckEditor:
 	def __init__(self, source):
@@ -88,16 +82,14 @@ class EqualityCheckEditor:
 		end = self.get_offset(t.end)
 		return self.source[start - 1].isspace() and self.source[end].isspace()
 
-
 def write_script(source, path):
 	output_path = path.with_suffix(".py")
 	output_path.write_text(source)
 
-
 if __name__ == "__main__":
 	path = get_path()
 	source = get_source(path)
-	source = FunctionDefinitionEditor(source).edit_source()
 	source = EqualityCheckEditor(source).edit_source()
+	source = FunctionDefinitionEditor(source).edit_source()
 	source = VariableAssignmentEditor(source).edit_source()
 	write_script(source, path)
