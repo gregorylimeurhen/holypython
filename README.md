@@ -1,51 +1,48 @@
-# 𓆩 H𓂋lyPython 𓆪
+# 🐍 SnekScript
 
-## Compilation
+SnekScript is a Python dialect that compiles to Python.
 
+<table>
+	<tr>
+		<td><img src="examples/two_sum_ii.py.png" /></td>
+		<td><img src="examples/two_sum_ii.ss.png" /></td>
+	</tr>
+</table>
+
+## Boarding
+
+To install the SnekScript compiler on Linux or MacOS, run:
+```bash
+install ssc /usr/local/bin
+```
+
+To uninstall the SnekScript compiler on Linux or MacOS, run:
 ```sh
-# Compile HolyPython file to Python file
-cd holypython
-python holypython.py foo.hpy
+rm /usr/local/bin/ssc
 ```
 
 ## Syntax
 
-| Idea                | Python   | HolyPython |
+| Idea                | Python   | SnekScript |
 |---------------------|----------|------------|
 | Equality check      | `a == b` | `a = b`    |
 | Variable assignment | `a = b`  | `a <- b`   |
 | Function definition | `def`    | `function` |
 
-### Examples
+## Usage
 
-```holypython
-class TwoSumII:
-	function __init__(self, nums, target):
-		self.nums <- nums
-		self.target <- target
-
-	function search(self):
-		l <- 0
-		r <- len(self.nums) - 1
-		while l < r:
-			current <- self.nums[l] + self.nums[r]
-			if current = self.target:
-				return [l + 1, r + 1]
-			if current < self.target:
-				l <- l + 1
-			if current > self.target:
-				r <- r - 1
+To compile `file.ss` to `file.py`, run:
+```sh
+ssc file.ss
 ```
 
-### Highlighting
-
-**VSCode**
-
+To enable syntax highlighting in VS Code, run:
 ```sh
+cd extensions/vscode
+
 # Build extension
-cd holypython/packages/vscode
-npx @vscode/vsce package --out holypython.vsix
+npx @vscode/vsce package --out snekscript.vsix
 
 # Install extension
-code --install-extension holypython.vsix
+code --install-extension snekscript.vsix
 ```

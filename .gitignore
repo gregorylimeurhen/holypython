@@ -1,4 +1,7 @@
 .DS_Store
 .venv
+*.spec
 *cache*
+build
+dist
 uv.lock

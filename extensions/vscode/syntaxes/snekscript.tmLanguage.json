@@ -1,0 +1,45 @@
+{
+	"scopeName": "source.snekscript",
+	"patterns": [
+		{
+			"include": "source.python"
+		}
+	],
+	"injections": {
+		"L:source.snekscript": {
+			"patterns": [
+				{
+					"include": "#snekscript"
+				}
+			]
+		}
+	},
+	"repository": {
+		"snekscript": {
+			"patterns": [
+				{
+					"name": "meta.function.python",
+					"begin": "\\b(function)\\s+([A-Za-z_]\\w*)",
+					"end": ":",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.function.python"
+						},
+						"2": {
+							"name": "entity.name.function.python"
+						}
+					},
+					"patterns": [
+						{
+							"include": "source.python#parameters"
+						}
+					]
+				},
+				{
+					"name": "keyword.operator.assignment.snekscript",
+					"match": "<-"
+				}
+			]
+		}
+	}
+}

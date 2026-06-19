@@ -1,4 +1,4 @@
-import holypython
+import snekscript
 import utils
 
 def test_edit_function():
@@ -8,5 +8,5 @@ function add(a, b):
 
 result = add(2, 3)
 """
-	namespace = utils.run_source(holypython.FunctionDefinitionEditor, source)
+	namespace = utils.run_source(snekscript.FunctionDefinitionEditor, source)
 	assert namespace["result"] == 5

@@ -1,0 +1,26 @@
+{
+	"name": "snekscript",
+	"displayName": "SnekScript",
+	"version": "0.0.1",
+	"publisher": "snekscript",
+	"engines": {
+		"vscode": "^1.80.0"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "snekscript",
+				"aliases": ["SnekScript"],
+				"configuration": "./language-configuration.json",
+				"extensions": [".ss"]
+			}
+		],
+		"grammars": [
+			{
+				"language": "snekscript",
+				"scopeName": "source.snekscript",
+				"path": "./syntaxes/snekscript.tmLanguage.json"
+			}
+		]
+	}
+}
