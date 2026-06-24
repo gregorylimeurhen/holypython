@@ -2,9 +2,8 @@
 	"name": "snekscript",
 	"displayName": "SnekScript",
 	"version": "0.0.1",
-	"publisher": "snekscript",
 	"engines": {
-		"vscode": "^1.80.0"
+		"vscode": "*"
 	},
 	"contributes": {
 		"languages": [

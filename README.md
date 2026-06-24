@@ -1,46 +1,38 @@
 # 🐍 SnekScript
 
+SnekScript (SS) is a Python dialect that compiles to Python using the SnekScript Compiler (SSC).
+
 <table>
 	<tr>
 		<td><img src="examples/two_sum_ii.py.png" /></td>
+		<td>→</td>
 		<td><img src="examples/two_sum_ii.ss.png" /></td>
 	</tr>
 </table>
 
-## Boarding
+The syntax is designed to be human-friendly and pseudocode-like.
 
-To install the SnekScript compiler on Linux or MacOS, run:
+| Idea                | Python   | SnekScript |
+| ------------------- | -------- | ---------- |
+| Equality check      | `a == b` | `a = b`    |
+| Variable assignment | `a = b`  | `a <- b`   |
+| Function definition | `def`    | `function` |
+
+## Setup
+
+To install SSC on Linux or MacOS, run:
 ```bash
 install ssc /usr/local/bin
 ```
 
-To uninstall the SnekScript compiler on Linux or MacOS, run:
+To enable syntax highlighting in Visual Studio Code, run:
 ```sh
-rm /usr/local/bin/ssc
+code --install-extension extensions/vscode/snekscript.vsix
 ```
-
-## Syntax
-
-| Idea                | Python   | SnekScript |
-|---------------------|----------|------------|
-| Equality check      | `a == b` | `a = b`    |
-| Variable assignment | `a = b`  | `a <- b`   |
-| Function definition | `def`    | `function` |
 
 ## Usage
 
 To compile `file.ss` to `file.py`, run:
 ```sh
 ssc file.ss
-```
-
-To enable syntax highlighting in VS Code, run:
-```sh
-cd extensions/vscode
-
-# Build extension
-npx @vscode/vsce package --out snekscript.vsix
-
-# Install extension
-code --install-extension snekscript.vsix
 ```
